@@ -99,6 +99,32 @@ bool insertValueInList(Node* node, int Value)
 	return true;
 }
 
+//反转链表
+//返回头指针
+Node* reverseList(Node* head)
+{
+	Node* p;
+	p = head->next;
+	free(head);
+	Node* temp;
+	temp = p;
+	p = p->next;
+	temp->next = NULL;
+	Node* per;
+	per = temp;
+	Node* q;
+	while (p->next != NULL)
+	{
+		q = p->next;
+		p->next = per;
+		per = p;
+		p = q;
+	}
+	p->next = per;
+	Node *h = (Node*)malloc(sizeof(Node));
+	h->next = p;
+	return h;
+}
 //在控制台上遍历显示链表
 void ShowListInConsole(Node* head)
 {
@@ -123,6 +149,8 @@ int main()
 	ShowListInConsole(head);
 	insertValueInList(getPositionForValue(head, 1), 2);
 	ShowListInConsole(head);
+	Node* re = reverseList(head);
+	ShowListInConsole(re);
     return 0; 
 }
 
