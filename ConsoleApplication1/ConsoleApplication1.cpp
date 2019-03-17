@@ -136,6 +136,66 @@ void ShowListInConsole(Node* head)
 	printf("\n");
 
 }
+//用单向链表创建空栈
+//返回头指针
+Node* createStack()
+{
+	Node* head = (Node*)malloc(sizeof(Node));
+	head->next = NULL;
+	return head;
+}
+
+//判断是否空栈
+//空栈返回true，否则返回false
+bool stackIsEmpty(Node* head)
+{
+	if (head->next == NULL)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+//压栈
+//成功返回true
+bool stackPush(Node* head, int Value)
+{
+	Node* node = (Node*)malloc(sizeof(Node));
+	Node* temp;
+	if (head->next == NULL)
+	{
+		head->next = node;
+		node->Data = Value;
+		node->next = NULL;
+	}
+	else
+	{
+		temp = head->next;
+		head->next = node;
+		node->Data = Value;
+		node->next = temp;
+	}
+	return true;
+}
+
+//出栈
+//返回出栈节点值
+int stackPop(Node* head)
+{
+	Node* temp;
+	int value;
+	if (!stackIsEmpty(head))
+	{
+		temp = head->next;
+		value = temp->Data;
+		head->next = temp->next;
+		free(temp);
+		return value;
+	}
+}
 
 int main()
 {
@@ -151,6 +211,17 @@ int main()
 	ShowListInConsole(head);
 	Node* re = reverseList(head);
 	ShowListInConsole(re);
+	Node* stack = createStack();
+	if (stackIsEmpty(stack))
+	{
+		printf("Yes\n");
+	}
+	stackPush(stack, 1);
+	stackPush(stack, 2);
+	ShowListInConsole(stack);
+	printf("%d\n",stackPop(stack));
+	printf("%d\n", stackPop(stack));
+
     return 0; 
 }
 
