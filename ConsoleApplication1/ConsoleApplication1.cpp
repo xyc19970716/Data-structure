@@ -11,6 +11,13 @@ struct Node
 	Node* next;
 };
 
+struct TreeNode
+{
+	int Data;
+	TreeNode* left;
+	TreeNode* right;
+};
+
 //创建链表
 Node* createList()
 {
@@ -197,6 +204,37 @@ int stackPop(Node* head)
 	}
 }
 
+//创建二叉树
+//返回根节点
+TreeNode* createTree()
+{
+	int val;
+	scanf("%d",&val);
+	if (val == -1)
+	{
+		return NULL;
+	}
+	else
+	{
+		TreeNode* head = (TreeNode*)malloc(sizeof(TreeNode));
+		head->Data = val;
+		head->left = createTree();
+		head->right = createTree();
+		return head;
+	}
+}
+
+//二叉树先序遍历
+void perOrder(TreeNode* head)
+{
+	if (head != NULL)
+	{
+		printf("%d ", head->Data);
+		perOrder(head->left);
+		perOrder(head->right);
+	}
+
+}
 int main()
 {
 
@@ -221,6 +259,9 @@ int main()
 	ShowListInConsole(stack);
 	printf("%d\n",stackPop(stack));
 	printf("%d\n", stackPop(stack));
+
+	TreeNode* tree = createTree();
+	perOrder(tree);
 
     return 0; 
 }
