@@ -204,7 +204,7 @@ int stackPop(Node* head)
 	}
 }
 
-//创建二叉树
+//先序创建二叉树
 //返回根节点
 TreeNode* createTree()
 {
@@ -233,7 +233,28 @@ void perOrder(TreeNode* head)
 		perOrder(head->left);
 		perOrder(head->right);
 	}
+}
 
+//二叉树中序遍历
+void inOrder(TreeNode* head)
+{
+	if (head != NULL)
+	{
+		inOrder(head->left);
+		printf("%d ", head->Data);
+		inOrder(head->right);
+	}
+}
+
+//二叉树后序遍历
+void lastOrder(TreeNode* head)
+{
+	if (head != NULL)
+	{
+		lastOrder(head->left);
+		lastOrder(head->right);
+		printf("%d ", head->Data);
+	}
 }
 int main()
 {
@@ -262,6 +283,11 @@ int main()
 
 	TreeNode* tree = createTree();
 	perOrder(tree);
+	printf("\n");
+	inOrder(tree);
+	printf("\n");
+	lastOrder(tree);
+	printf("\n");
 
     return 0; 
 }
