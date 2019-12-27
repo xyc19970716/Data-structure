@@ -256,39 +256,73 @@ void lastOrder(TreeNode* head)
 		printf("%d ", head->Data);
 	}
 }
+
+int getTreeDepth(TreeNode* head)
+{
+	if (head == NULL)
+	{
+		return 0;
+	}
+	int left = getTreeDepth(head->left);
+	int right = getTreeDepth(head->right);
+
+	return (left >= right ? left : right) + 1;
+}
 int main()
 {
-
+	printf("hello world!\n");
+	printf("please input the values of the list:(by the end of -1)\n");
 	Node* head = createList();
+	printf("show the list:");
 	ShowListInConsole(head);
+	printf("print the length of the list:");
 	printf("%d\n", getListLengh(head));
+	printf("return an index of the value 2:");
 	Node* find = getPositionForValue(head, 2);
 	printf("%d\n", find->Data);
+	printf("delete the value 2 of the node\n");
 	deleteValueForList(head, 2);
+	printf("show the list after processed:");
 	ShowListInConsole(head);
+	printf("insert value 2 after node 1\n");
 	insertValueInList(getPositionForValue(head, 1), 2);
+	printf("show the list after inserted:");
 	ShowListInConsole(head);
+	printf("show the reversed list:");
 	Node* re = reverseList(head);
 	ShowListInConsole(re);
+	printf("create a stack\n");
 	Node* stack = createStack();
+	printf("the stack is empty?:");
 	if (stackIsEmpty(stack))
 	{
 		printf("Yes\n");
 	}
+	printf("push 1 to the stack.");
 	stackPush(stack, 1);
+	printf("push 2 to the stack.");
 	stackPush(stack, 2);
+	printf("show this stack:");
 	ShowListInConsole(stack);
+	printf("pop the stack is:");
 	printf("%d\n",stackPop(stack));
+	printf("pop the stack is:");
 	printf("%d\n", stackPop(stack));
 
+	printf("please input the node to create a tree:(input in perorder)");
 	TreeNode* tree = createTree();
+	
+	printf("show perorder:");
 	perOrder(tree);
 	printf("\n");
+	printf("show inorder:");
 	inOrder(tree);
 	printf("\n");
+	printf("show lastorder:");
 	lastOrder(tree);
 	printf("\n");
-
+	printf("the depth of the tree is:");
+	printf("%d\n", getTreeDepth(tree));
     return 0; 
 }
 
